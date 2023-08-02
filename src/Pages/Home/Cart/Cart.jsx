@@ -11,16 +11,18 @@ const Cart = () => {
       <p>{cart.length}</p>
       <div>
         <div className="d-flex gap-5 ">
-          {cart.map((product) => (
-            <>
-              <div className="border">
-                <p>{product.model}</p>
-                <p>{product.price}</p>
-                <p>{product.quantity}</p>
-                <button onClick={() => dispatch(removeFromCart(product))}>remove product</button>
-              </div>
-            </>
-          ))}
+          {cart
+            .sort((a, b) => a._id - b._id)
+            .map((product) => (
+              <>
+                <div className="border">
+                  <p>{product.model}</p>
+                  <p>{product.price}</p>
+                  <p>{product.quantity}</p>
+                  <button onClick={() => dispatch(removeFromCart(product))}>remove product</button>
+                </div>
+              </>
+            ))}
         </div>
       </div>
     </div>
