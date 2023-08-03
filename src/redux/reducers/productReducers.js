@@ -1,16 +1,22 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actionTypes/actionTypes";
+import { ADD_TO_CART, LOAD_PRODUCT, REMOVE_FROM_CART } from "../actionTypes/actionTypes";
 
 const initialState = {
   cart: [],
+  products: [],
 };
 
 const productReducer = (state = initialState, action) => {
   // find selected product
   const selectedProduct = state.cart.find((product) => product._id === action.payload._id);
-  
+
   console.log(selectedProduct);
 
   switch (action.type) {
+    case LOAD_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
     case ADD_TO_CART:
       if (selectedProduct) {
         // filter same id product with selected product id

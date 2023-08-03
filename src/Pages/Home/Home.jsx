@@ -6,30 +6,27 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import "./Home.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBrand, toggleStock } from "../../redux/actionCreators/filterActions";
+import { loadProduct } from "../../redux/actionCreators/actionCreators";
+import fetchProductsData from "../../redux/thunk/products/fetchProducts";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
   const filters = useSelector((state) => state.filter.filters);
+  const products = useSelector((state) => state.product.products);
+  console.log(products);
   const { brands, stock } = filters;
   // console.log(brands);
 
   const activeClass = "text-primary text-bg-dark";
 
   useEffect(() => {
-    // fetch("http://localhost:5000/products")
-    fetch("products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setProducts(data);
-        // console.log(data.data);
-        // setProducts(data.data);
-      });
-  }, []);
+    dispatch(fetchProductsData());
+  }, [dispatch]);
 
   let content;
+
   if (products.length) {
     content = products?.map((product) => <ProductCard key={product._id} product={product}></ProductCard>);
   }
@@ -51,8 +48,10 @@ const Home = () => {
       .map((product) => <ProductCard product={product}></ProductCard>);
     console.log(content);
   }
-  const state = useSelector((state) => state);
-  console.log(state);
+
+  // const state = useSelector((state) => state);
+  // console.log(state);
+
   return (
     <div>
       <section>
