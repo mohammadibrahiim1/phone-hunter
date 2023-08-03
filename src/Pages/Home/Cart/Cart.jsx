@@ -4,7 +4,7 @@ import { removeFromCart } from "../../../redux/actionCreators/actionCreators";
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.product.cart);
   console.log(cart);
   const dispatch = useDispatch();
   return (

@@ -7,6 +7,7 @@ const initialState = {
 const productReducer = (state = initialState, action) => {
   // find selected product
   const selectedProduct = state.cart.find((product) => product._id === action.payload._id);
+  
   console.log(selectedProduct);
 
   switch (action.type) {

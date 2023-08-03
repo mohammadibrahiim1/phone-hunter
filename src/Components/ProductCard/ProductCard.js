@@ -2,12 +2,12 @@
 // import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ADD_TO_CART } from "../../redux/actionTypes/actionTypes";
+// import { ADD_TO_CART } from "../../redux/actionTypes/actionTypes";
 import { addToCart } from "../../redux/actionCreators/actionCreators";
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 
 const ProductCard = ({ product }) => {
-  const { image, keyFeature, model, price } = product;
+  const { image, keyFeature, model, price, status, brand } = product;
   const dispatch = useDispatch();
 
   return (
@@ -22,6 +22,9 @@ const ProductCard = ({ product }) => {
           <Badge color="pink" variant="light">
             ${price}
           </Badge>
+          <Badge color="pink" variant="light">
+            ${brand}
+          </Badge>
         </Group>
 
         <Text size="sm" color="dimmed">
@@ -32,7 +35,14 @@ const ProductCard = ({ product }) => {
           ))}
         </Text>
 
-        <Button onClick={() => dispatch(addToCart(product))} variant="light" color="blue" fullWidth mt="md" radius="md">
+        <Button
+          onClick={() => dispatch(addToCart(product))}
+          variant="light"
+          color="blue"
+          fullWidth
+          mt="md"
+          radius="md"
+        >
           add to cart
         </Button>
       </Card>
