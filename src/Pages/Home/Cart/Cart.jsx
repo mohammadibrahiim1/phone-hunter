@@ -13,7 +13,7 @@ const Cart = () => {
       <div>
         <div className="d-flex gap-5 ">
           {cart
-            .sort((a, b) => a._id - b._id)
+            .sort((a, b) => a.cartPosition - b.cartPosition)
             .map((product) => (
               <>
                 <Card shadow="sm" padding="lg" radius="md" withBorder>

@@ -31,7 +31,7 @@ const Home = () => {
 
   let content;
   if (products.length) {
-    content = products?.map((product) => <ProductCard product={product}></ProductCard>);
+    content = products?.map((product) => <ProductCard key={product._id} product={product}></ProductCard>);
   }
 
   if (products.length && (stock || brands.length)) {
