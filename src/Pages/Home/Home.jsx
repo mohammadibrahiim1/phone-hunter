@@ -8,11 +8,13 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  console.log(products);
   useEffect(() => {
-    fetch("products.json")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        // console.log(data.data);
+        setProducts(data.data);
       });
   }, []);
 
@@ -24,7 +26,7 @@ const Home = () => {
       <section>
         <Button>{products.length}</Button>
         <div className="card_container">
-          {products.map((product) => (
+          {products?.map((product) => (
             <ProductCard product={product}></ProductCard>
           ))}
         </div>
