@@ -1,23 +1,19 @@
-import { Button, Group, Text } from "@mantine/core";
-// import { useCounter } from "@mantine/hooks";f
-import React, { useContext, useEffect, useState } from "react";
-import { counter_context } from "../../App";
+import { Button } from "@mantine/core";
+import React, { useEffect } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import "./Home.css";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBrand, toggleStock } from "../../redux/actionCreators/filterActions";
-import { loadProduct } from "../../redux/actionCreators/actionCreators";
+
 import fetchProductsData from "../../redux/thunk/products/fetchProducts";
 
 const Home = () => {
-  // const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
 
   const filters = useSelector((state) => state.filter.filters);
   const products = useSelector((state) => state.product.products);
   console.log(products);
   const { brands, stock } = filters;
-  // console.log(brands);
 
   const activeClass = "text-primary text-bg-dark";
 
@@ -48,9 +44,6 @@ const Home = () => {
       .map((product) => <ProductCard product={product}></ProductCard>);
     console.log(content);
   }
-
-  // const state = useSelector((state) => state);
-  // console.log(state);
 
   return (
     <div>
