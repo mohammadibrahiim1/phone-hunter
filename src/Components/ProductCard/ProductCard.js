@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { addToCart } from "../../redux/actionCreators/actionCreators";
+// import { addToCart } from "../../redux/actionCreators/actionCreators";
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const ProductCard = ({ product }) => {
   const { image, keyFeature, model, price, brand } = product;
