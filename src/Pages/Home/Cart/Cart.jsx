@@ -13,7 +13,7 @@ const Cart = () => {
       <p className="text-center"> products in cart : {cart.length}</p>
       <div>
         <div className="d-flex gap-5 justify-content-center align-items-center ">
-          {cart ? (
+          {cart.length ? (
             cart
               // .sort((a, b) => a.cartPosition - b.cartPosition)
               .map((product) => (
