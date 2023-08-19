@@ -8,6 +8,7 @@ import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { toggle, toggleBrands } from "../../features/filter/filterSlice";
 import { getProducts } from "../../features/products/productsSlice";
+import { useGetProductsQuery } from "../../features/api/apiSlice";
 
 // const useStyles = createStyles(() => ({
 //   pContainer: {
@@ -22,12 +23,14 @@ import { getProducts } from "../../features/products/productsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, isLoading } = useSelector((state) => state.products);
-  console.log(products);
+  // const { products, isLoading } = useSelector((state) => state.products);
+  // console.log(products);
+  const { isError, isLoading, isSuccess, data, error } = useGetProductsQuery();
+  const products = data?.data;
   // const { classes } = useStyles();
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, []);
   // http://localhost:5000/products
 
   const filter = useSelector((state) => state.filter);
@@ -45,6 +48,13 @@ const Home = () => {
     return (
       <Text c={"teal"} align="center">
         Loading...
+      </Text>
+    );
+  }
+  if (isError) {
+    return (
+      <Text c={"red"} align="center">
+        something went wrong...
       </Text>
     );
   }
@@ -76,7 +86,7 @@ const Home = () => {
   return (
     <div>
       <Container size={"lg"} mt={"lg"}>
-        <Button>{products.length}</Button>
+        <Button> total Products : {products.length}</Button>
 
         <div className="d-flex gap-4 mx-auto w-50 mx-auto ">
           <Button
