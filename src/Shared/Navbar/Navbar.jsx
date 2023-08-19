@@ -13,6 +13,9 @@ const Navbar = () => {
           <li>
             <Link to="/cart">cart</Link>
           </li>
+          <li>
+            <Link to="/allProducts">allProducts</Link>
+          </li>
         </ul>
       </div>
     </div>

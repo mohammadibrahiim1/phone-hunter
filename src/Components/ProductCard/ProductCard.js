@@ -6,14 +6,15 @@ import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
 import { addToCart } from "../../features/cart/cartSlice";
 
 const ProductCard = ({ product }) => {
-  const { image, keyFeature, model, price, brand } = product;
+  console.log(product);
+  const { image, keyFeature, model, price, brand, thumbnail } = product;
   const dispatch = useDispatch();
 
   return (
     <div>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Card.Section component="a" href="https://mantine.dev/">
-          <Image src={image} height={160} alt="Norway" />
+          <Image src={image ? image : thumbnail} height={160} alt="Norway" />
         </Card.Section>
 
         <Group position="apart" mt="md" mb="xs">
@@ -27,11 +28,13 @@ const ProductCard = ({ product }) => {
         </Group>
 
         <Text size="sm" color="dimmed">
-          {keyFeature.map((keyfeature) => (
-            <>
-              <p>{keyfeature}</p>
-            </>
-          ))}
+          {keyFeature
+            ? keyFeature.map((keyfeature) => (
+                <>
+                  <p>{keyfeature}</p>
+                </>
+              ))
+            : ""}
         </Text>
 
         <Button onClick={() => dispatch(addToCart(product))} variant="light" color="blue" fullWidth mt="md" radius="md">

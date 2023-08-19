@@ -1,5 +1,5 @@
 import { Button, Container, Text, createStyles } from "@mantine/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import "./Home.css";
 // import { useDispatch, useSelector } from "react-redux";
@@ -25,12 +25,19 @@ const Home = () => {
   const dispatch = useDispatch();
   // const { products, isLoading } = useSelector((state) => state.products);
   // console.log(products);
-  const { isError, isLoading, isSuccess, data, error } = useGetProductsQuery();
+  const { isError, isLoading, isSuccess, data, error } = useGetProductsQuery(null);
   const products = data?.data;
+  console.log(products);
+  const [devices, setDevices] = useState([]);
   // const { classes } = useStyles();
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, []);
+  useEffect(() => {
+    fetch("products.json")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setDevices(data);
+      });
+  }, []);
   // http://localhost:5000/products
 
   const filter = useSelector((state) => state.filter);

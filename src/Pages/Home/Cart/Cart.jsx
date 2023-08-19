@@ -2,12 +2,24 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
-import { removeFromCart } from "../../../features/cart/cartSlice";
+// import { removeFromCart } from "../../../features/cart/cartSlice";
+import { useGetProductsQuery, useRemoveProductMutation } from "../../../features/api/apiSlice";
+import { toast } from "react-hot-toast";
 
 const Cart = () => {
+  const [removeProduct, { isSuccess }] = useRemoveProductMutation();
   const cart = useSelector((state) => state.cart.cart);
   console.log(cart);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const { data, isLoading } = useGetProductsQuery();
+
+  if (isLoading) {
+    return <div className="text-center text-teal-500"> Loading...</div>;
+  }
+  if (isSuccess) {
+    toast.success("product deleted", { id: "removeProduct" });
+    // dispatch(togglePostSuccess());
+  }
   return (
     <div>
       <p className="text-center"> products in cart : {cart.length}</p>
@@ -42,7 +54,7 @@ const Cart = () => {
                     </Text>
 
                     <Button
-                      onClick={() => dispatch(removeFromCart(product))}
+                      onClick={() => removeProduct(product._id)}
                       variant="light"
                       color="blue"
                       fullWidth
